@@ -1,46 +1,85 @@
 <?php
 
-include "inc/header.php"
+include "inc/header.php";
+include "inc/snippet.php";
+
+//Clean the input before adding to the database
+if(isset($_POST["submit"])){
+    $name = sanitize(trim($_POST['fname']));
+    $secondName= sanitize(trim($_POST['sname']));
+    $admNumber = sanitize(trim($_POST['admNum']));
+    $dateOfBirth = sanitize(trim($_POST['dob']));
+    $address = sanitize(trim($_POST['address']));
+    $location = sanitize(trim($_POST['location']));
+    $allergy = sanitize(trim($_POST['allergy']));
+    $height = sanitize(trim($_POST['height']));
+    $weight = sanitize(trim($_POST['weight']));
+    $disabled = sanitize(trim($_POST['disabled']));
+    $parentFname = sanitize(trim($_POST['pFname']));
+    $parentSname= sanitize(trim($_POST['pSname']));
+    $telNumber = sanitize(trim($_POST['telNo']));
+    $nationality = sanitize(trim($_POST['nationality']));
+
+}
+
+
 ?>
 <style>
-    .form-sections {
-        width: inherit;
-        border: 1px groove #ddd !important;
-        padding: 50px 1.4em 1.4em 1.4em !important;
+    .col-1{
+        transform: translate(30px);
 
+transition: opacity 1s ease-in-out, transform 0.5s ease-in-out
 
-        -webkit-box-shadow: 0px 0px 0px 0px #000;
-        box-shadow: 0px 0px 0px 0px #000;
     }
 
-    fieldset {
-        display: block;
-        margin-left: 2px;
-        margin-right: 2px;
-        padding-top: 0.35em;
-        padding-bottom: 0.625em;
-        padding-left: 0.75em;
-        padding-right: 0.75em;
-        border: 2px groove (internal value);
+    .col-2{
+        transform: translate(50px);
+
+transition: opacity 1s ease-in-out, transform 0.5s ease-in-out
+
     }
+  
+
+.col-md{
+ 
+  background-color: #556962;
+  opacity: 0.9;
+ 
+
+}
+.col-1:hover{
+
+    opacity: 1;
+  transform: translate(10px);
+
+}
+.col-2:hover{
+    opacity: 1;
+    transform: translate(20px);
+
+}
+
+
     
 </style>
 
+<body background="backimg.jpg">
+  
+    <div class="container-fluid">
 
-<body>
-    <div class="container-fluid " >
-      
-        <div class="mt-4 p-5 bg-primary text-white rounded" style="background-color: cadetblue;">
+        <div class="mt-4 p-5   rounded" style="background-color: #16473c;">
+        
+
             <h1> SCHOOLEXIA</h1>
-            <p>A school management system</p>
+            <p style="font-size: 20px;">A school management system</p>
         </div>
     </div>
 
-    <div class="container form-sections">
+    <div class="container form-sections scroll">
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
-            <div class="col-md" style="border-right: 1px solid lightblue;">
-                <form action="#" method="post">
-                    <fieldset>
+            <div class="col-md col-1" style="border-right: 1px solid lightblue;">
+                <form action="studentAdm.php" method="post" class=" needs-validation" id="studentForm">
+                    <fieldset class="student">
                         <legend>Student Details</legend>
 
                         <div class="mb-3 mt-3">
@@ -55,7 +94,7 @@ include "inc/header.php"
 
                         <div class="mb-3 mt-3">
                             <label for="admNum" class=" form-label">Admssion Number:</label>
-                            <input type="text" name="sname" id="sname" class=" form-control" placeholder="Admission Number">
+                            <input type="text" name="admNum" id="admNum" class=" form-control" placeholder="Admission Number">
                         </div>
 
                         <div class="mb-3 mt-3">
@@ -67,10 +106,7 @@ include "inc/header.php"
                             <label for="adress" class=" form-label">Address:</label>
                             <input type="text" name="address" id="address" class=" form-control" placeholder="Address">
                         </div>
-                        <div class="mb-3 mt-3">
-                            <label for="adress" class=" form-label">Address:</label>
-                            <input type="text" name="address" id="address" class=" form-control" placeholder="Address">
-                        </div>
+                       
                         <div class="mb-3 mt-3">
                             <label for="Location" class=" form-label">Location:</label>
                             <input type="text" name="location" id="loction" class=" form-control" placeholder="location">
@@ -81,7 +117,7 @@ include "inc/header.php"
                     </fieldset>
 
                     <fieldset>
-                        <legend>Health Details</legend>
+                        <legend>Medical Details</legend>
                         <div class="mb-3 mt-3">
                             <label for="allergy" class=" form-label">Known Allergy:</label>
                             <input type="text" name="allergy" id="allergy" class=" form-control" placeholder="Known Allergens">
@@ -102,38 +138,58 @@ include "inc/header.php"
                             <input type="radio" id="no" name="disabled" value="no">
                             <label for="no">NO</label><br>
                             <input type="radio" id="other" name="disabled" value="other">
-                            <label for="other">Other</label>                            
+                            <label for="other">Other</label>
                         </div>
+                    
 
-                    </fieldset>
+                    </fieldset>               
 
-                </form>
-              
+                 
+
+               
+
 
             </div>
-            <div class="col-md">
-                <form action="#" method="post">
+            <div class="col-md col-2">
+               
                     <fieldset>
                         <legend>Parent/Gaurdian Details</legend>
                         <div class="mb-3 mt-3">
-                            <label for="fname" class=" form-label">First Name:</label>
-                            <input type="text" name="fname" id="fname" class=" form-control" placeholder="First Name">
+                            <label for="pFname" class=" form-label">First Name:</label>
+                            <input type="text" name="pFname" id="pFname" class=" form-control" placeholder="First Name">
                         </div>
 
                         <div class="mb-3 mt-3">
-                            <label for="sname" class=" form-label">Second Name:</label>
-                            <input type="text" name="sname" id="sname" class=" form-control" placeholder="Second Name">
+                            <label for="pSname" class=" form-label">Second Name:</label>
+                            <input type="text" name="pSname" id="pSname" class=" form-control" placeholder="Second Name">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="telNo" class=" form-label">Telephone:</label>
                             <input type="text" name="telNo" id="telNo" class=" form-control" placeholder="071267890">
                         </div>
                         <div class="mb-3 mt-3">
-                            <label for="Nationality">  Nationality:</label>
+                            <label for="Nationality"> Nationality:</label>
                             <input type="text" name="nationality" id="nationality" placeholder=" Kenyan" class=" form-control">
                         </div>
 
                     </fieldset>
+                    <fieldset>
+                        <legend>Requirements:</legend>
+                        
+
+                        <div class="mb-3 mt-3">
+                            <label for="section">School Requirements</label> <br>
+                            <input type="checkbox" id="yes" name="disabled" value="yes">
+                            <label for="yes">Fee Paid</label><br>
+                            <input type="checkbox" id="no" name="disabled" value="no">
+                            <label for="no">Rim of Paper</label><br>
+                            <input type="checkbox" id="other" name="disabled" value="other">
+                            <label for="other">Other</label>
+                        </div>
+                    </fieldset>
+                    <div class="mb-3 mt-3">
+                        <input type="submit" class=" form-group-sm btn btn-primary" value="ADD STUDENT">
+                    </div>
 
                 </form>
 
@@ -142,5 +198,7 @@ include "inc/header.php"
 
     </div>
 </body>
+
+
 
 </html>
